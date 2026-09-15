@@ -58,6 +58,8 @@ project as MIT licensed.
 
 ## Screenshots
 
+> **Track map note:** The track map visible in the screenshots is provided by **MultiViewer for F1** and is **not part of Retro LiveTiming or this MultiView Edition**.
+
 ### Multi 1 – Practice
 
 ![Multi 1 – Practice](screenshots/multi1-practice.png)
