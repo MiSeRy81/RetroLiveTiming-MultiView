@@ -3,7 +3,7 @@
 Customized **Retro LiveTiming** build focused on the **MULTI 1 / MULTI 2**
 timing layouts.
 
-**Current release: v1.0.0**
+**Current release: v1.1.0**
 
 This project is an unofficial community modification of Retro LiveTiming by
 TrueVirusTV. The embedded upstream package metadata declares the original
@@ -12,7 +12,7 @@ project as MIT licensed.
 > Not affiliated with or endorsed by Formula 1, F1 TV, MultiViewer, or their
 > respective owners.
 
-> **Note:** The Qualifying layout is still a work in progress and is not yet part of the finished v1.0 MultiView design. Practice and Race are the currently optimized session layouts.
+> **Note:** The Qualifying layout is still a work in progress and is not yet part of the finished MultiView design.
 
 ## Highlights
 
@@ -20,6 +20,7 @@ project as MIT licensed.
 - Refined 2×2 MultiView layouts.
 - Compact P1, P2, P3 and P4 presentation.
 - Numerous alignment, spacing and readability improvements.
+- Lower P3 weather / track-map section integrated into **Multi 1 – P3** and **Multi 2 – PC**.
 
 ### P1
 - Refined timing-column alignment.
@@ -37,6 +38,11 @@ project as MIT licensed.
 ### P3
 - Race-control messages are displayed chronologically.
 - The newest message appears at the bottom.
+- Integrated circuit map using MultiViewer circuit geometry.
+- Custom wind-direction arrow aligned to the displayed circuit orientation.
+- 3-hour track-temperature and air-temperature graph.
+- Compact weather block with track temperature, air temperature, wet/dry status, wind speed, humidity and pressure.
+- Refined lower-layout sizing, spacing and footer clearance.
 
 ### P4 – Practice
 - Removed Speed 1 / Speed 2 / Speed 3 columns.
@@ -58,7 +64,7 @@ project as MIT licensed.
 
 ## Screenshots
 
-> **Track map note:** The track map visible in the screenshots is provided by **MultiViewer for F1** and is **not part of Retro LiveTiming or this MultiView Edition**.
+> **Track map note:** Circuit geometry used by the integrated P3 map is sourced from **MultiViewer** data. This project is not affiliated with or endorsed by MultiViewer.
 
 ### Multi 1 – Practice
 
@@ -78,23 +84,27 @@ project as MIT licensed.
 
 ## Installation
 
-This release is provided as a complete portable Windows package.
+### v1.1.0 ASAR update
 
-1. Download `RetroLiveTiming-MultiView-v1.0.0-Windows.zip`.
-2. Extract the ZIP to a folder of your choice.
-3. Start `RetroLiveTiming for F1.exe`.
+1. Download `RetroLiveTiming-MultiView-v1.1.0-ASAR.zip`.
+2. Close Retro LiveTiming.
+3. Extract `app.asar` from the ZIP.
+4. Back up the existing `resources/app.asar` file.
+5. Replace it with the new `app.asar`.
+6. Start Retro LiveTiming again.
 
-No manual `app.asar` replacement is required.
+### v1.0.0 portable Windows package
+
+The original complete portable Windows package is still available from the v1.0.0 release.
 
 ## Requirements
 
 - Windows 10 or Windows 11.
 - MultiViewer / live timing must be running and accessible to Retro LiveTiming.
-- No previous Retro LiveTiming installation is required for the portable ZIP.
 
 ## Versioning
 
-The public MultiView Edition starts at **v1.0.0**.
+The public MultiView Edition started at **v1.0.0**.
 
 The executable itself may still show metadata from the original upstream
 application because this release replaces `resources/app.asar` rather than
