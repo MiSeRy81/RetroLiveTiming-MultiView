@@ -1,0 +1,438 @@
+
+
+/* P3: keep left track map and center chart fully above footer boundary; right weather block unchanged */
+.trackMapContainer,.weatherChartContainer{transform:translateY(-82px)!important;}
+
+/* zzzdb17be - P3 lower strip copied into MULTI 1 P3 / MULTI 2 lower control panel */
+.multiPageVariant .multiP3 .multiP3Body,
+.multi2PageOnly .multiP3 .multiP3Body{
+  height:calc(100% - 158px)!important;
+  overflow:hidden!important;
+}
+.multiPageVariant .multiP3>.multiWeatherTable,
+.multi2PageOnly .multiP3>.multiWeatherTable,
+.multiPageVariant .multiP3 .multiP3Body>.multiWeatherTable,
+.multi2PageOnly .multiP3 .multiP3Body>.multiWeatherTable{
+  display:none!important;
+}
+.p3MultiLower{
+  position:absolute!important;
+  left:8px!important;
+  right:8px!important;
+  bottom:8px!important;
+  height:148px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:8px!important;
+  box-sizing:border-box!important;
+  background:#000!important;
+  z-index:20!important;
+  overflow:visible!important;
+}
+.p3MultiLower .p3MultiMapContainer{
+  width:24%!important;
+  height:148px!important;
+  position:relative!important;
+  flex:0 0 24%!important;
+}
+.p3MultiLower .trackMap{
+  width:100%!important;
+  height:100%!important;
+}
+.p3MultiLower .p3MultiChartContainer{
+  width:47%!important;
+  height:148px!important;
+  flex:0 0 47%!important;
+  overflow:visible!important;
+}
+.p3MultiLower .p3MultiWeatherContainer{
+  width:27%!important;
+  flex:0 0 27%!important;
+  overflow:visible!important;
+}
+.p3MultiLower .weatherInfoTable{
+  width:100%!important;
+  float:none!important;
+  font-size:11px!important;
+  font-family:Verdana,Geneva,Tahoma,sans-serif!important;
+  font-weight:700!important;
+  letter-spacing:0!important;
+  line-height:1.08!important;
+}
+.p3MultiLower .weatherInfoTable td{
+  padding:0 1px 1px!important;
+  white-space:nowrap!important;
+}
+.p3MultiLower .weatherInfoTable .p3LegendMarkerCell{
+  width:10px!important;
+  min-width:10px!important;
+  max-width:10px!important;
+}
+.p3MultiLower .weatherInfoTable .p3LegendLabel{
+  min-width:0!important;
+  padding-right:4px!important;
+}
+.p3MultiLower .p3track{stroke-width:8!important}
+.p3MultiLower .p3chart text{font-size:20px!important;letter-spacing:0!important}
+.p3MultiLower .p3chart .period{font-size:20px!important}
+
+
+/* zzzdb17bf - MULTI P3 lower strip: map visible + compact alignment */
+.multiDashboard .multiP3 .multiP3Body{
+  height:calc(100% - 190px)!important;
+  overflow:hidden!important;
+}
+.multiDashboard .multiP3>.multiWeatherTable,
+.multiDashboard .multiP3 .multiP3Body>.multiWeatherTable{
+  display:none!important;
+}
+.multiDashboard .multiP3>.p3MultiLower{
+  position:absolute!important;
+  top:auto!important;
+  left:18px!important;
+  right:18px!important;
+  bottom:16px!important;
+  height:174px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:12px!important;
+  box-sizing:border-box!important;
+  background:#000!important;
+  z-index:20!important;
+  overflow:hidden!important;
+  transform:none!important;
+}
+.p3MultiLower .trackMapContainer,
+.p3MultiLower .weatherChartContainer{
+  transform:none!important;
+  margin:0!important;
+}
+.p3MultiLower .p3MultiMapContainer{
+  width:27%!important;
+  height:166px!important;
+  flex:0 0 27%!important;
+  position:relative!important;
+  overflow:visible!important;
+}
+.p3MultiLower .trackMap,
+.p3MultiLower .p3map{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  overflow:visible!important;
+}
+.p3MultiLower .p3MultiChartContainer{
+  width:44%!important;
+  height:166px!important;
+  flex:0 0 44%!important;
+  overflow:visible!important;
+}
+.p3MultiLower .p3chart{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  overflow:visible!important;
+}
+.p3MultiLower .p3MultiWeatherContainer{
+  width:26%!important;
+  flex:1 1 26%!important;
+  align-self:center!important;
+  overflow:hidden!important;
+}
+.p3MultiLower .weatherInfoTable{
+  width:100%!important;
+  float:none!important;
+  table-layout:auto!important;
+  font-size:15px!important;
+  font-family:Verdana,Geneva,Tahoma,sans-serif!important;
+  font-weight:700!important;
+  letter-spacing:0!important;
+  line-height:1.16!important;
+}
+.p3MultiLower .weatherInfoTable td{
+  padding:0 1px 2px!important;
+  white-space:nowrap!important;
+}
+.p3MultiLower .weatherInfoTable .p3LegendMarkerCell{
+  width:12px!important;
+  min-width:12px!important;
+  max-width:12px!important;
+  padding-right:2px!important;
+}
+.p3MultiLower .weatherInfoTable .p3LegendLabel{
+  min-width:0!important;
+  padding-right:8px!important;
+}
+.p3MultiLower .p3chart text{font-size:18px!important;letter-spacing:0!important}
+.p3MultiLower .p3chart .period{font-size:18px!important}
+.p3MultiLower .p3track{stroke-width:8!important}
+
+/* zzzdb17bg - MULTI P3 lower block: larger and fully above P3 footer label */
+.multiDashboard .multiP3 .multiP3Body{
+  height:calc(100% - 226px)!important;
+  overflow:hidden!important;
+}
+.multiDashboard .multiP3>.p3MultiLower{
+  left:14px!important;
+  right:14px!important;
+  bottom:36px!important;
+  height:190px!important;
+  gap:10px!important;
+  align-items:center!important;
+  overflow:hidden!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3MultiMapContainer{
+  width:29%!important;
+  flex:0 0 29%!important;
+  height:184px!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3MultiChartContainer{
+  width:43%!important;
+  flex:0 0 43%!important;
+  height:184px!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3MultiWeatherContainer{
+  width:26%!important;
+  flex:1 1 26%!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .weatherInfoTable{
+  font-size:16px!important;
+  line-height:1.18!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .weatherInfoTable td{
+  padding-bottom:2px!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3chart text{
+  font-size:21px!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3chart .period{
+  font-size:21px!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3track{
+  stroke-width:8.5!important;
+}
+
+
+/* MULTI lower P3 strip: move higher and scale up */
+.multiDashboard .multiP3 .trackInfoWrapper,
+.multi2Dashboard .multi2P2 .trackInfoWrapper{
+  bottom:170px!important;
+  height:390px!important;
+  margin-left:28px!important;
+  margin-right:28px!important;
+  gap:26px!important;
+}
+.multiDashboard .multiP3 .trackMapContainer,
+.multi2Dashboard .multi2P2 .trackMapContainer{
+  width:24%!important;
+  height:390px!important;
+}
+.multiDashboard .multiP3 .weatherChartContainer,
+.multi2Dashboard .multi2P2 .weatherChartContainer{
+  width:53%!important;
+  height:390px!important;
+}
+.multiDashboard .multiP3 .weatherInfoContainer,
+.multi2Dashboard .multi2P2 .weatherInfoContainer{
+  width:23%!important;
+}
+.multiDashboard .multiP3 .p3track,
+.multi2Dashboard .multi2P2 .p3track{
+  stroke-width:8!important;
+}
+.multiDashboard .multiP3 .p3wind,
+.multi2Dashboard .multi2P2 .p3wind{
+  stroke-width:8!important;
+}
+.multiDashboard .multiP3 .p3chart text,
+.multi2Dashboard .multi2P2 .p3chart text{
+  font-size:24px!important;
+}
+.multiDashboard .multiP3 .p3chart .period,
+.multi2Dashboard .multi2P2 .p3chart .period{
+  font-size:25px!important;
+}
+.multiDashboard .multiP3 .p3chart .axis,
+.multi2Dashboard .multi2P2 .p3chart .axis{
+  stroke-width:5!important;
+}
+.multiDashboard .multiP3 .p3chart polyline,
+.multi2Dashboard .multi2P2 .p3chart polyline{
+  stroke-width:5!important;
+}
+.multiDashboard .multiP3 .weatherInfoTable,
+.multi2Dashboard .multi2P2 .weatherInfoTable{
+  font-size:28px!important;
+  font-weight:700!important;
+}
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendMarkerCell,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendMarkerCell{
+  width:28px!important;
+  min-width:28px!important;
+  max-width:28px!important;
+}
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendLabel,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendLabel{
+  min-width:245px!important;
+  padding-right:24px!important;
+}
+
+
+/* zzzdb17bi - MULTI P3 lower strip: clearly higher and larger */
+.multiDashboard .multiP3 .multiP3Body{
+  height:calc(100% - 320px)!important;
+  overflow:hidden!important;
+}
+.multiDashboard .multiP3>.p3MultiLower{
+  left:10px!important;
+  right:10px!important;
+  bottom:82px!important;
+  height:242px!important;
+  gap:12px!important;
+  align-items:center!important;
+  overflow:hidden!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3MultiMapContainer{
+  width:31%!important;
+  flex:0 0 31%!important;
+  height:234px!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3MultiChartContainer{
+  width:42%!important;
+  flex:0 0 42%!important;
+  height:234px!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3MultiWeatherContainer{
+  width:25%!important;
+  flex:1 1 25%!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .weatherInfoTable{
+  font-size:20px!important;
+  line-height:1.20!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .weatherInfoTable td{
+  padding-bottom:3px!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3chart text{
+  font-size:25px!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3chart .period{
+  font-size:25px!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3track{
+  stroke-width:10!important;
+}
+
+
+/* MULTI P3 fine-tune: unclip 70°C and bring labels closer to fixed values */
+.multiDashboard .multiP3 .p3chart text:first-of-type,
+.multi2Dashboard .multi2P2 .p3chart text:first-of-type{
+  transform:translateY(12px)!important;
+}
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendLabel,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendLabel{
+  min-width:168px!important;
+  padding-right:10px!important;
+}
+
+
+/* zzzdb17bk - restore 70C position, allow top overflow, tighten weather labels */
+.multiDashboard .multiP3>.p3MultiLower{
+  overflow:visible!important;
+}
+.multiDashboard .multiP3>.p3MultiLower .p3MultiChartContainer,
+.multiDashboard .multiP3>.p3MultiLower .weatherChartContainer,
+.multiDashboard .multiP3>.p3MultiLower .p3chart{
+  overflow:visible!important;
+}
+.multiDashboard .multiP3 .p3chart text:first-of-type,
+.multi2Dashboard .multi2P2 .p3chart text:first-of-type{
+  transform:none!important;
+}
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendLabel,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendLabel{
+  min-width:140px!important;
+  padding-right:4px!important;
+}
+
+
+/* zzzdb17bo - keep bk numeric alignment, move labels visually closer by right-aligning them */
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendLabel,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendLabel{
+  min-width:140px!important;
+  padding-right:2px!important;
+  text-align:right!important;
+}
+
+
+/* zzzdb17bp - give weather labels a little more room from the numbers */
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendLabel,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendLabel{
+  min-width:140px!important;
+  padding-right:6px!important;
+  text-align:right!important;
+}
+
+
+/* zzzdb17bq - move weather labels 10px further left */
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendLabel,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendLabel{
+  min-width:140px!important;
+  padding-right:16px!important;
+  text-align:right!important;
+}
+
+
+/* zzzdb17bu - move only the two colored weather arrows into the weather block */
+.multiDashboard .multiP3 .weatherInfoTable .trackTempRow .p3LegendMarkerCell,
+.multiDashboard .multiP3 .weatherInfoTable .airTempRow .p3LegendMarkerCell,
+.multi2Dashboard .multi2P2 .weatherInfoTable .trackTempRow .p3LegendMarkerCell,
+.multi2Dashboard .multi2P2 .weatherInfoTable .airTempRow .p3LegendMarkerCell{
+  transform:translateX(60px)!important;
+}
+
+
+/* zzzdb17bv - make MULTI P3 weather labels left-aligned */
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendLabel,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendLabel{
+  text-align:left!important;
+}
+
+
+/* zzzdb17bw - move MULTI P3 weather label text closer to the numbers */
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendLabel,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendLabel{
+  min-width:132px!important;
+  padding-right:8px!important;
+  text-align:left!important;
+}
+
+
+/* zzzdb17bx - move only MULTI P3 weather label text 20px right */
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendLabel,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendLabel{
+  transform:translateX(20px)!important;
+}
+
+
+/* zzzdb17by - move only MULTI P3 weather label text 15px further right */
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendLabel,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendLabel{
+  transform:translateX(35px)!important;
+}
+
+
+/* zzzdb17bz - move only MULTI P3 weather label text 10px further right */
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendLabel,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendLabel{
+  transform:translateX(45px)!important;
+}
+
+
+/* zzzdb17ca - move only MULTI P3 weather label text 5px further right */
+.multiDashboard .multiP3 .weatherInfoTable .p3LegendLabel,
+.multi2Dashboard .multi2P2 .weatherInfoTable .p3LegendLabel{
+  transform:translateX(50px)!important;
+}
