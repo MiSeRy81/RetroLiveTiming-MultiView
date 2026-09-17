@@ -1,0 +1,34 @@
+name: Assemble v1.1.0 ASAR package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.upload-parts/complete'
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Assemble package
+        shell: bash
+        run: |
+          mkdir -p downloads
+          cat .upload-parts/part-* > downloads/RetroLiveTiming-MultiView-v1.1.0-ASAR.zip
+          echo "3ae948388ab792a8e20974c14d8e5659b5f181ecb0f1a68e58185aebde535c9a  downloads/RetroLiveTiming-MultiView-v1.1.0-ASAR.zip" | sha256sum -c -
+
+      - name: Commit assembled package
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add downloads/RetroLiveTiming-MultiView-v1.1.0-ASAR.zip
+          git rm -r .upload-parts
+          git commit -m "Add v1.1.0 ASAR update package"
+          git push
