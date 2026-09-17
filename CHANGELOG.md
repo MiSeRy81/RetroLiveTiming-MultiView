@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.2.0] - 2026-09-17
+
+Qualifying layout and presentation update for the **Retro LiveTiming MultiView Edition**.
+
+### Qualifying
+- Finalized and refined the MultiView Qualifying presentation.
+- Improved timing-column alignment and readability in the Qualifying layouts.
+- Refined the P4 Qualifying overview with GAP and Q1 / Q2 / Q3 session-time presentation.
+- Improved spacing and presentation of driver status / elimination information.
+- Kept the P3 race-control, track-map and weather presentation consistent during Qualifying.
+
+### Documentation / Screenshots
+- Added updated Formula 1 Qualifying screenshots.
+- Removed the previous work-in-progress status for the Qualifying layout.
+
 ## [1.1.0] - 2026-09-17
 
 P3 weather and track-map update for the **Retro LiveTiming MultiView Edition**.
