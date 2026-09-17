@@ -3,7 +3,7 @@
 Customized **Retro LiveTiming** build focused on the **MULTI 1 / MULTI 2**
 timing layouts.
 
-**Current release: v1.1.0**
+**Current release: v1.2.0**
 
 This project is an unofficial community modification of Retro LiveTiming by
 TrueVirusTV. The embedded upstream package metadata declares the original
@@ -11,8 +11,6 @@ project as MIT licensed.
 
 > Not affiliated with or endorsed by Formula 1, F1 TV, MultiViewer, or their
 > respective owners.
-
-> **Note:** The Qualifying layout is still a work in progress and is not yet part of the finished MultiView design.
 
 ## Highlights
 
@@ -34,6 +32,12 @@ project as MIT licensed.
 - Refined BEST LAP / ON LAP presentation.
 - Improved gap-to-car-ahead alignment.
 - Refined lap-count positioning.
+
+### Qualifying
+- Refined MultiView Qualifying presentation.
+- Improved timing-column spacing and readability.
+- Refined P4 Qualifying overview with GAP and Q1 / Q2 / Q3 session times.
+- Improved driver-status and elimination presentation.
 
 ### P3
 - Race-control messages are displayed chronologically.
@@ -70,6 +74,10 @@ project as MIT licensed.
 
 ![Multi 1 – Practice](screenshots/multi1-practice.png)
 
+### Multi 1 – Qualifying
+
+![Multi 1 – Qualifying](screenshots/multi1-qualifying.png)
+
 ### Multi 1 – Race
 
 ![Multi 1 – Race](screenshots/multi1-race.png)
@@ -82,11 +90,15 @@ project as MIT licensed.
 
 ![Multi 2 – Race](screenshots/multi2-race.png)
 
+### P3 – Qualifying
+
+![P3 – Qualifying](screenshots/p3-qualifying.png)
+
 ## Installation
 
-### v1.1.0 ASAR update
+### v1.2.0 ASAR update
 
-1. Download `RetroLiveTiming-MultiView-v1.1.0-ASAR.zip`.
+1. Download `RetroLiveTiming-MultiView-v1.2.0-ASAR.zip`.
 2. Close Retro LiveTiming.
 3. Extract `app.asar` from the ZIP.
 4. Back up the existing `resources/app.asar` file.
