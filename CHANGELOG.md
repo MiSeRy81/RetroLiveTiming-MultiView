@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.1.0] - 2026-09-17
+
+P3 weather and track-map update for the **Retro LiveTiming MultiView Edition**.
+
+### P3
+- Added an integrated circuit map using MultiViewer circuit geometry.
+- Added a custom wind-direction arrow aligned to the displayed circuit orientation.
+- Corrected the wind-arrow calculation so the arrow shows the direction the wind is travelling relative to the rotated track map.
+- Added a 3-hour graph for track temperature and air temperature.
+- Added/refined the compact weather block for track temperature, air temperature, wet/dry status, wind speed, humidity and pressure.
+- Refined the lower P3 layout so the map, graph and weather data remain clearly above the footer.
+- Fixed the 70°C chart label positioning and clipping.
+- Refined map size, chart size, weather-label spacing and marker-arrow alignment.
+- Replaced the simple wind indicator with a clearer custom yellow arrow.
+
+### Multi 1 / Multi 2
+- Integrated the lower P3 map/weather section into **Multi 1 – P3** and **Multi 2 – PC**.
+- Increased the size and readability of the map, temperature graph and weather block in the Multi layouts.
+- Fine-tuned vertical placement and spacing to match the lower P3 presentation.
+
+### Data / Integration
+- Circuit geometry is sourced from MultiViewer circuit data.
+- Live weather values continue to use the MultiViewer live-timing data connection.
+
 ## [1.0.0] - 2026-09-15
 
 First public release of the **Retro LiveTiming MultiView Edition**.
