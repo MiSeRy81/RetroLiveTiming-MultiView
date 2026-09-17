@@ -1,4 +1,4 @@
-name: Inspect v1.0.0 ASAR base
+name: Build and release v1.1.0 ASAR
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  inspect:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,11 +29,122 @@ jobs:
           BASE_ASAR="$(find /tmp/retrolivetiming-base -type f -name app.asar | head -n 1)"
           test -n "$BASE_ASAR"
           cp "$BASE_ASAR" /tmp/base-app.asar
-          sha256sum /tmp/base-app.asar
 
-      - name: Upload base ASAR for comparison
-        uses: actions/upload-artifact@v4
-        with:
-          name: v1.0.0-base-app-asar
-          path: /tmp/base-app.asar
-          compression-level: 0
+      - name: Assemble v1.1.0 app.asar
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          import json
+          import struct
+          from pathlib import Path
+
+          src = Path('/tmp/base-app.asar')
+          dst = Path('/tmp/app.asar')
+          p3mv = Path('.release-build/p3mv.js').read_bytes()
+          css_append = Path('.release-build/p3-css-append.css').read_bytes()
+
+          with src.open('rb') as f:
+              payload_sz, header_sz = struct.unpack('<II', f.read(8))
+              if payload_sz != 4:
+                  raise RuntimeError('Unexpected ASAR size pickle')
+              hb = f.read(header_sz)
+              _, slen = struct.unpack('<II', hb[:8])
+              header = json.loads(hb[8:8+slen])
+              data_start = 8 + header_sz
+
+              def walk(node, prefix=''):
+                  for name, meta in node.get('files', {}).items():
+                      path = (prefix + '/' + name).lstrip('/')
+                      if 'files' in meta:
+                          yield from walk(meta, path)
+                      else:
+                          yield path, meta
+
+              original = {}
+              for path, meta in walk(header):
+                  f.seek(data_start + int(meta['offset']))
+                  original[path] = f.read(int(meta['size']))
+
+          css_paths = [p for p in original if p.startswith('public/static/css/main.') and p.endswith('.css')]
+          if len(css_paths) != 1:
+              raise RuntimeError(f'Expected one main CSS file, found: {css_paths}')
+          css_path = css_paths[0]
+
+          original[css_path] = original[css_path].rstrip() + b'\n' + css_append.lstrip()
+
+          index_path = 'public/index.html'
+          if index_path not in original:
+              raise RuntimeError('public/index.html not found')
+          index = original[index_path].decode('utf-8')
+          if '/p3mv.js' not in index:
+              index = index.replace('</body>', '<script src="/p3mv.js"></script></body>')
+          original[index_path] = index.encode('utf-8')
+
+          def ensure_file(path, data):
+              parts = path.split('/')
+              node = header
+              for part in parts[:-1]:
+                  node = node.setdefault('files', {}).setdefault(part, {'files': {}})
+              files = node.setdefault('files', {})
+              files.setdefault(parts[-1], {'size': len(data), 'offset': '0'})
+              original[path] = data
+
+          ensure_file('public/p3mv.js', p3mv)
+
+          entries = list(walk(header))
+          out_data = []
+          offset = 0
+          for path, meta in entries:
+              data = original[path]
+              meta['size'] = len(data)
+              meta['offset'] = str(offset)
+              out_data.append(data)
+              offset += len(data)
+
+          raw = json.dumps(header, separators=(',', ':'), ensure_ascii=False).encode('utf-8')
+          pad = b'\0' * ((-len(raw)) % 4)
+          hpayload = struct.pack('<I', len(raw)) + raw + pad
+          hbuf = struct.pack('<I', len(hpayload)) + hpayload
+
+          with dst.open('wb') as f:
+              f.write(struct.pack('<II', 4, len(hbuf)))
+              f.write(hbuf)
+              for data in out_data:
+                  f.write(data)
+
+          print(f'Built {dst} ({dst.stat().st_size} bytes)')
+          PY
+
+          sha256sum /tmp/app.asar
+          rm -rf /tmp/v1.1.0-asar
+          mkdir -p /tmp/v1.1.0-asar
+          cp /tmp/app.asar /tmp/v1.1.0-asar/app.asar
+          cd /tmp/v1.1.0-asar
+          zip -9 /tmp/RetroLiveTiming-MultiView-v1.1.0-ASAR.zip app.asar
+          sha256sum /tmp/RetroLiveTiming-MultiView-v1.1.0-ASAR.zip
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v1.1.0 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload v1.1.0 \
+              /tmp/app.asar \
+              /tmp/RetroLiveTiming-MultiView-v1.1.0-ASAR.zip \
+              --clobber --repo "$GITHUB_REPOSITORY"
+            gh release edit v1.1.0 \
+              --title 'Retro LiveTiming MultiView Edition v1.1.0' \
+              --notes-file RELEASE_NOTES.md \
+              --repo "$GITHUB_REPOSITORY"
+          else
+            gh release create v1.1.0 \
+              /tmp/app.asar \
+              /tmp/RetroLiveTiming-MultiView-v1.1.0-ASAR.zip \
+              --target main \
+              --title 'Retro LiveTiming MultiView Edition v1.1.0' \
+              --notes-file RELEASE_NOTES.md \
+              --repo "$GITHUB_REPOSITORY"
+          fi
