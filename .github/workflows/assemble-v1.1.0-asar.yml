@@ -8,7 +8,8 @@ on:
 
 permissions:
   contents: write
-\ njobs:
+
+jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
