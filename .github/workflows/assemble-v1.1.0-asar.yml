@@ -1,34 +1,117 @@
-name: Assemble v1.1.0 ASAR package
+name: Build and publish v1.1.0 ASAR
 
 on:
   push:
     branches: [main]
     paths:
-      - '.upload-parts/complete'
+      - '.release-build/complete'
 
 permissions:
   contents: write
 
 jobs:
-  assemble:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Assemble package
+      - name: Download v1.0.0 portable base
         shell: bash
         run: |
-          mkdir -p downloads
-          cat .upload-parts/part-* > downloads/RetroLiveTiming-MultiView-v1.1.0-ASAR.zip
-          echo "3ae948388ab792a8e20974c14d8e5659b5f181ecb0f1a68e58185aebde535c9a  downloads/RetroLiveTiming-MultiView-v1.1.0-ASAR.zip" | sha256sum -c -
+          set -euo pipefail
+          curl -fL --retry 3 \
+            -o /tmp/retrolivetiming-v1.0.0.zip \
+            'https://github.com/MiSeRy81/RetroLiveTiming-MultiView/releases/download/v1.0.0/RetroLiveTiming-MultiView-v1.0.0-Windows.zip'
+          rm -rf /tmp/retrolivetiming-base
+          mkdir -p /tmp/retrolivetiming-base
+          unzip -q /tmp/retrolivetiming-v1.0.0.zip -d /tmp/retrolivetiming-base
+          BASE_ASAR="$(find /tmp/retrolivetiming-base -type f -name app.asar | head -n 1)"
+          test -n "$BASE_ASAR"
+          echo "BASE_ASAR=$BASE_ASAR" >> "$GITHUB_ENV"
+          echo '9be4b71e8c1c89271f3dd00548ae100c22619865dc9e3476bdfe245e48e4b81e  '"$BASE_ASAR" | sha256sum -c -
 
-      - name: Commit assembled package
+      - name: Build exact v1.1.0 app.asar
         shell: bash
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add downloads/RetroLiveTiming-MultiView-v1.1.0-ASAR.zip
-          git rm -r .upload-parts
-          git commit -m "Add v1.1.0 ASAR update package"
-          git push
+          set -euo pipefail
+          mkdir -p /tmp/retrolivetiming-v1.1.0
+          cp "$BASE_ASAR" /tmp/retrolivetiming-v1.1.0/app.asar
+          python3 - <<'PY'
+          import json, struct
+          from pathlib import Path
+
+          src = Path('/tmp/retrolivetiming-v1.1.0/app.asar')
+          js = Path('.release-build/p3mv.js').read_bytes()
+          css_append = Path('.release-build/p3-css-append.css').read_bytes()
+
+          with src.open('rb') as f:
+              payload_sz, header_sz = struct.unpack('<II', f.read(8))
+              if payload_sz != 4:
+                  raise ValueError('unexpected ASAR size pickle')
+              hb = f.read(header_sz)
+              _, slen = struct.unpack('<II', hb[:8])
+              header = json.loads(hb[8:8+slen])
+              data_start = 8 + header_sz
+
+              def walk(node, prefix=''):
+                  for name, meta in node.get('files', {}).items():
+                      p = (prefix + '/' + name).lstrip('/')
+                      if 'files' in meta:
+                          yield from walk(meta, p)
+                      else:
+                          yield p, meta, int(meta['offset']), int(meta['size'])
+
+              entries = list(walk(header))
+              blobs = []
+              off = 0
+              for path, meta, oldoff, oldsize in entries:
+                  f.seek(data_start + oldoff)
+                  data = f.read(oldsize)
+                  if len(data) != oldsize:
+                      raise IOError(f'short read: {path}')
+                  if path == 'public/p3mv.js':
+                      data = js
+                  elif path == 'public/static/css/main.c1049923.css':
+                      data = data + css_append
+                  meta['size'] = len(data)
+                  meta['offset'] = str(off)
+                  blobs.append(data)
+                  off += len(data)
+
+          raw = json.dumps(header, separators=(',', ':'), ensure_ascii=False).encode('utf-8')
+          pad = b'\0' * ((-len(raw)) % 4)
+          hpayload = struct.pack('<I', len(raw)) + raw + pad
+          hbuf = struct.pack('<I', len(hpayload)) + hpayload
+          size_pickle = struct.pack('<II', 4, len(hbuf))
+
+          out = src.with_suffix('.new')
+          with out.open('wb') as f:
+              f.write(size_pickle)
+              f.write(hbuf)
+              for data in blobs:
+                  f.write(data)
+          out.replace(src)
+          PY
+          echo '5580e2cebd81989281d38aba258f83cb51a86d663b7e84f2d0525daacaefd97d  /tmp/retrolivetiming-v1.1.0/app.asar' | sha256sum -c -
+
+      - name: Package ASAR update
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/retrolivetiming-v1.1.0
+          zip -9 -q RetroLiveTiming-MultiView-v1.1.0-ASAR.zip app.asar
+          sha256sum RetroLiveTiming-MultiView-v1.1.0-ASAR.zip
+
+      - name: Publish GitHub Release v1.1.0
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create v1.1.0 \
+            /tmp/retrolivetiming-v1.1.0/RetroLiveTiming-MultiView-v1.1.0-ASAR.zip \
+            --repo '${{ github.repository }}' \
+            --target main \
+            --title 'Retro LiveTiming MultiView Edition v1.1.0' \
+            --notes-file RELEASE_NOTES.md
