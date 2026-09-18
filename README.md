@@ -3,7 +3,7 @@
 Customized **Retro LiveTiming** build focused on the **MULTI 1 / MULTI 2**
 timing layouts.
 
-**Current release: v1.2.0**
+**Current release: v1.3.0**
 
 This project is an unofficial community modification of Retro LiveTiming by
 TrueVirusTV. The embedded upstream package metadata declares the original
@@ -14,11 +14,19 @@ project as MIT licensed.
 
 ## Highlights
 
-### MULTI 1 / MULTI 2
-- Refined 2×2 MultiView layouts.
+### MULTI 1
+- Refined fixed 2×2 MultiView layout.
 - Compact P1, P2, P3 and P4 presentation.
 - Numerous alignment, spacing and readability improvements.
-- Lower P3 weather / track-map section integrated into **Multi 1 – P3** and **Multi 2 – PC**.
+- Lower P3 weather / track-map section integrated into the layout.
+
+### MULTI 2
+- Refined 2×2 MultiView layout.
+- P1, P2, P3 and P4 can be freely assigned to any of the four windows.
+- Built-in **LAYOUT** control for changing the arrangement while Retro LiveTiming is running.
+- Selecting a view automatically swaps the affected windows.
+- **STANDARD** restores the default arrangement.
+- Multi 2 layout customization is independent from the fixed Multi 1 layout.
 
 ### P1
 - Refined timing-column alignment.
@@ -32,6 +40,14 @@ project as MIT licensed.
 - Refined BEST LAP / ON LAP presentation.
 - Improved gap-to-car-ahead alignment.
 - Refined lap-count positioning.
+- Improved replay rewind handling.
+- When seeking backwards in a replay, cached lap-dependent values are reset so data from later laps is no longer displayed at an earlier replay position.
+
+### Race Control Tracker
+- Tracks Safety Car, Virtual Safety Car and Red Flag phases.
+- Displays cumulative **SC / VSC / RED** counters.
+- Counter history remains visible after a Safety Car, VSC or Red Flag phase has ended.
+- Improved compatibility with older F1 replay timing data.
 
 ### Qualifying
 - Refined MultiView Qualifying presentation.
@@ -74,31 +90,36 @@ project as MIT licensed.
 
 ![Multi 1 – Practice](screenshots/multi1-practice.png)
 
-### Multi 1 – Qualifying
-
-![Multi 1 – Qualifying](screenshots/multi1-qualifying.png)
-
 ### Multi 1 – Race
 
 ![Multi 1 – Race](screenshots/multi1-race.png)
 
-### Multi 2 – Practice
+### Multi 2 – Qualifying
 
-![Multi 2 – Practice](screenshots/multi2-practice.png)
+![Multi 2 – Qualifying](screenshots/multi2-qualifying.png)
 
 ### Multi 2 – Race
 
 ![Multi 2 – Race](screenshots/multi2-race.png)
 
-### P3 – Qualifying
+### Multi 2 – Custom Layout
 
-![P3 – Qualifying](screenshots/p3-qualifying.png)
+The four views can be freely assigned to the four Multi 2 windows using the
+built-in **LAYOUT** control.
+
+![Multi 2 – Custom Layout](screenshots/multi2-self-custom.png)
+
+### P3 – Race
+
+Race Control, circuit map, weather information and temperature history.
+
+![P3 – Race](screenshots/p3-race.png)
 
 ## Installation
 
-### v1.2.0 ASAR update
+### v1.3.0 ASAR update
 
-1. Download `RetroLiveTiming-MultiView-v1.2.0-ASAR.zip`.
+1. Download `RetroLiveTiming-MultiView-v1.3.0-ASAR.zip`.
 2. Close Retro LiveTiming.
 3. Extract `app.asar` from the ZIP.
 4. Back up the existing `resources/app.asar` file.
