@@ -1,19 +1,25 @@
-# Retro LiveTiming MultiView Edition v1.2.0
+# Retro LiveTiming MultiView Edition v1.3.0
 
-This update focuses on the **Qualifying layout** and related MultiView presentation refinements.
+This update adds a customizable **MULTI 2** layout and improves replay handling
+and Race Control tracking.
 
 ## Highlights
 
-- Finalized and refined the MultiView Qualifying presentation.
-- Improved Qualifying timing-column spacing and readability.
-- Refined the P4 Qualifying overview with GAP and Q1 / Q2 / Q3 session times.
-- Improved driver-status / elimination presentation.
-- Added updated Formula 1 Qualifying screenshots.
-- Existing P3 circuit-map, race-control and weather presentation remains integrated.
+- Added a customizable **MULTI 2** 2×2 layout.
+- P1, P2, P3 and P4 can now be freely assigned to any of the four Multi 2 windows.
+- Added a built-in **LAYOUT** control.
+- Selecting an already-used view automatically swaps the affected windows.
+- **STANDARD** restores the default Multi 2 arrangement.
+- Multi 1 remains unchanged as the fixed standard layout.
+- Added cumulative **SC / VSC / RED** Race Control counters.
+- Improved Race Control counter compatibility with older Formula 1 replay timing data.
+- Improved P2 replay rewind handling.
+- Cached lap-dependent P2 values are reset when seeking backwards, preventing data from later laps from remaining visible.
+- Updated screenshots for Practice, Qualifying, Race and the new customizable Multi 2 layout.
 
 ## ASAR update installation
 
-1. Download `RetroLiveTiming-MultiView-v1.2.0-ASAR.zip`.
+1. Download `RetroLiveTiming-MultiView-v1.3.0-ASAR.zip`.
 2. Close Retro LiveTiming.
 3. Extract `app.asar` from the ZIP.
 4. Back up the existing `resources/app.asar` file in your Retro LiveTiming installation.
